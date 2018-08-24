@@ -4,7 +4,9 @@ class PhotosController < ApplicationController
   end
 
   def new
-    @photo = Photo.new
+    if session[:user_id] != nil
+        @photo = Photo.new(user_id: params[:user_id])
+    end
   end
 
   def create
@@ -19,6 +21,6 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:caption, :image)
+    params.require(:photo).permit(:caption, :image, :user_id)
   end
 end

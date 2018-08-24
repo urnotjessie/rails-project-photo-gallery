@@ -1,4 +1,5 @@
 <% @photos.each do |photo| %>
-  <%= image_tag photo.image %>
+  <%= image_tag photo.thumbnail %>
   <%= photo.caption %>
+  <%= link_to("#{photo.user.username}", user_path(photo.user)) %>
 <% end %>

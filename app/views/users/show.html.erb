@@ -1,0 +1,9 @@
+<h2>Hello <%= @user.username %></h2>
+<% if @user.photos != [] %>
+  <% @user.photos.each do |photo| %>
+    <%= image_tag photo.thumbnail %>
+    <%= photo.caption %>
+  <% end %>
+<% end %>
+
+<%= link_to("Upload Photos", new_user_photo_path(@user)) %>
