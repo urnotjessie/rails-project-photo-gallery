@@ -1,0 +1,7 @@
+<%= form_for @photo do |f| %>
+  <%= f.file_field :image %>
+  <%= f.text_field :caption, placeholder: "Add Caption"%>
+  <!-- <%= f.select :creator_id, options_from_collection_for_select(User.all, :id, :username) %> -->
+
+  <%= f.submit "Upload photo"%>
+<% end %>
