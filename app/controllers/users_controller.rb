@@ -14,20 +14,9 @@ class UsersController < ApplicationController
   end
 
   def show
-
     @user = User.find(params[:id])
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  def update
-    @user = User.find(params[:id])
-    @photo = Photo.create(caption: params[:user][:caption], image:params[:user][:image])
-    @user.photos <<
-    @user.save
-  end
 
   private
 
