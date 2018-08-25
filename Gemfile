@@ -7,6 +7,12 @@ ruby '2.3.3'
 gem 'rails', '~> 5.2.1'
 gem 'activestorage'
 gem 'mini_magick'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'dotenv-rails'
+
+gem 'omniauth-google-oauth2'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
