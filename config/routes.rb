@@ -3,10 +3,13 @@ Rails.application.routes.draw do
   resources :photos
   resources :users do
     resources :photos
+    resources :photo_users
   end
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/auth/facebook/callback' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
+
+  root 'welcome#home'
 end

@@ -1,0 +1,4 @@
+<%= @user.username %> Collection
+<% @user.collected_photos.each do |collect| %>
+  <%= collect.caption %>
+<% end %>
