@@ -3,7 +3,12 @@
 
 <%= form_for [@photo, @photo_user] do |f| %>
   <%= f.label :label %><br>
-  <%= f.text_field :label %><br>
-  <%= f.select :collector_id, options_from_collection_for_select(User.all, :id, :username) %><br>
+  <% PhotoUser.labels.each do |label_name| %>
+    <%= f.radio_button :label, label_name %> <%= label_name %> <br>
+  <% end %>
+  <br>
+  <%= f.radio_button :label, 'Other' %> Other (please list):
+  <%= f.text_field :label %>
+  <br>
   <%= f.submit "Submit" %>
 <% end %>
