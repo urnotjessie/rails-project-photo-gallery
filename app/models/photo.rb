@@ -9,6 +9,8 @@ class Photo < ApplicationRecord
   validates :caption, presence: true
   validate :image_type
 
+  scope :most_recent, -> (limit) { order("created_at desc").limit(limit) }
+
   def thumbnail
     self.image.variant(resize:'300x300!').processed
   end
