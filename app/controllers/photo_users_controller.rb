@@ -10,8 +10,11 @@ class PhotoUsersController < ApplicationController
     @photo_user = PhotoUser.new(photo_user_params)
     @photo_user.collector_id = current_user.id
     @photo_user.photo_id = @photo.id
-    @photo_user.save
-    redirect_to user_photo_users_path(current_user)
+    if @photo_user.save
+      redirect_to user_photo_users_path(current_user)
+    else
+      redirect_to user_photo_users_path(current_user)
+    end
   end
 
   def index

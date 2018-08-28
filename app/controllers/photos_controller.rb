@@ -11,6 +11,10 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new(photo_params)
+    if session[:user_id] != nil
+        @photo.user_id = session[:user_id]
+    end
+    binding.pry
     if @photo.save
       redirect_to photos_path
     else
@@ -21,6 +25,6 @@ class PhotosController < ApplicationController
   private
 
   def photo_params
-    params.require(:photo).permit(:caption, :image, :user_id)
+    params.require(:photo).permit(:caption, :image)
   end
 end
