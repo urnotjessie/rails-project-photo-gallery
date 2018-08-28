@@ -1,14 +1,10 @@
 <% @photos.each do |photo| %>
   <%= image_tag photo.thumbnail %>
   <%= photo.caption %>
-  <%= link_to("#{photo.user.username}", user_path(photo.user)) %>
+  <%= link_to "#{photo.user.username}", user_path(photo.user) %>
 
   <% if session[:user_id] %>
-    <form accept-charset="UTF-8" action="/users/<%= photo.user.id %>/photo_users" method="post">
-      <input name="authenticity_token" type="hidden" value= "<%= form_authenticity_token %> "/>
-      <input name="photo" type="hidden" value= "<%= photo.id %>" />
-      <input name="Add to my collection" type= "submit" />
-    </form>
+    <%= link_to "Add to my collection", new_photo_photo_user_path(photo.id) %>
   <% end %>
 
 <% end %>
@@ -16,5 +12,5 @@
 <br>
 
 <% if session[:user_id] %>
-  <%= link_to('Log out', logout_path, :method => 'post') %>
+  <%= link_to 'Log out', logout_path, :method => 'post' %>
 <% end %>

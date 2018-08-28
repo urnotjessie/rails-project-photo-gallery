@@ -1,0 +1,9 @@
+<%= image_tag @photo.thumbnail %>
+<%= @photo.caption %>
+
+<%= form_for [@photo, @photo_user] do |f| %>
+  <%= f.label :label %><br>
+  <%= f.text_field :label %><br>
+  <%= f.select :collector_id, options_from_collection_for_select(User.all, :id, :username) %><br>
+  <%= f.submit "Submit" %>
+<% end %>
