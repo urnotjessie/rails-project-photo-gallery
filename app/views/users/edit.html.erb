@@ -1,0 +1,10 @@
+<div class="center jumbotron">
+  <%= form_for(@user) do |f| %>
+    <%= f.label :username %><br>
+    <%= f.text_field :username %><br><br>
+    <%= f.label :password %><br>
+    <%= f.password_field :password, { :value => '' } %><br><br>
+
+    <%= f.submit %>
+  <% end %>
+</div>
