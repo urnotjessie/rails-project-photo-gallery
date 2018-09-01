@@ -1,19 +1,19 @@
 <h2> <%= @user.username %></h2>
-<%= if @user == current_user %>
+<% if logged_in? && @user == current_user %>
   <%= link_to "Edit Profile", edit_user_path(@user)%>
-<%= end %>
+<% end %>
 
 <% if @user.photos != [] %>
   <% @user.photos.each do |photo| %>
     <%= image_tag photo.thumbnail %>
     <%= photo.caption %>
-    <%= if @user == current_user %>
+    <% if logged_in? && @user == current_user %>
       <%= link_to "Delete photo", user_photo_path(@user, photo), method: "DELETE" %>
     <% end %>
   <% end %>
 <% end %>
 <br>
-<%= if @user == current_user %>
+<% if @user == current_user %>
   <%= link_to("Upload Photos", new_user_photo_path(@user)) %>
 <br>
   <%= link_to("Log out", logout_path, :method => 'post') %>
