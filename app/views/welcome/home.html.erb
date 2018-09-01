@@ -1,16 +1,17 @@
 <div class="center jumbotron">
-  <%= form_tag(login_path) do %>
-    <%= text_field_tag 'email', nil, placeholder: 'Email' %><br><br>
-    <%= password_field_tag 'password', nil, placeholder: 'Password' %><br><br>
-    <%= submit_tag "Log In" %>
+
+  <% if session[:user_id] %>
+    <% @user = User.find(session[:user_id]) %>
+    <h1><%= @user.username %></h1>
+    <h2>Email: <%= @user.email %></h2>
+  <% else %>
+
+    <%= form_tag(login_path) do %>
+      <%= text_field_tag 'email', nil, placeholder: 'Email' %><br><br>
+      <%= password_field_tag 'password', nil, placeholder: 'Password' %><br><br>
+      <%= submit_tag "Log In" %>
+    <% end %>
+
+    <%= link_to('Log in with Facebook!', '/auth/facebook') %>
   <% end %>
 </div>
-
-
-<% if session[:user_id] %>
-  <% @user = User.find(session[:user_id]) %>
-  <h1><%= @user.username %></h1>
-  <h2>Email: <%= @user.email %></h2>
-<% else %>
-  <%= link_to('Log in with Facebook!', '/auth/facebook') %>
-<% end %>

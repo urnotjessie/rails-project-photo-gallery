@@ -3,15 +3,15 @@ class ApplicationController < ActionController::Base
 
   layout :determine_layout
 
+  private
+
   def current_user
-    User.find(session[:user_id])
+    User.find(session[:user_id]) if session[:user_id]
   end
 
   def logged_in?
     !!current_user
   end
-
-  private
 
   def determine_layout
     if logged_in?

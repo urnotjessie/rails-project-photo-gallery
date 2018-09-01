@@ -15,8 +15,9 @@
         <%= link_to "Photo Gallery", root_path, id: "logo" %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Home",   '#' %></li>
-            <li><%= link_to "Help",   '#' %></li>
+            <li><%= link_to "#{User.find(session[:user_id]).username}",   user_path(User.find(session[:user_id])) %></li>
+            <li><%= link_to "My Collection", user_photo_users_path(User.find(session[:user_id])) %></li>
+            <li><%= link_to "Log out", logout_path, method: 'POST' %></li>
           </ul>
         </nav>
       </div>
