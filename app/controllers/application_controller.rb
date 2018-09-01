@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  def require_login
+    if !logged_in?
+      redirect_to login_path
+    end
+  end
+
   def determine_layout
     if logged_in?
       "logged_in"

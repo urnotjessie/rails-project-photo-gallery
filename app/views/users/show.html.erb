@@ -3,8 +3,10 @@
   <% @user.photos.each do |photo| %>
     <%= image_tag photo.thumbnail %>
     <%= photo.caption %>
+    <%= link_to "Delete photo", user_photo_path(@user, photo), method: "DELETE" %>
   <% end %>
 <% end %>
-
+<br>
 <%= link_to("Upload Photos", new_user_photo_path(@user)) %>
+<br>
 <%= link_to("Log out", logout_path, :method => 'post') %>

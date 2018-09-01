@@ -1,25 +1,29 @@
 class PhotosController < ApplicationController
+  before_action :require_login
+  skip_before_action :require_login, only: [:index]
+
   def index
     @photos = Photo.all
   end
 
   def new
-    if session[:user_id] != nil
-        @photo = Photo.new(user_id: params[:user_id])
-    end
+    @photo = Photo.new(user_id: params[:user_id])
   end
 
   def create
     @photo = Photo.new(photo_params)
-    if session[:user_id] != nil
-        @photo.user_id = session[:user_id]
-    end
-    binding.pry
+    @photo.user_id = session[:user_id]
     if @photo.save
       redirect_to photos_path
     else
       render :new
     end
+  end
+
+  def destroy
+    @photo = Photo.find(params[:id])
+    @photo.delete
+    redirect_to user_path(current_user)
   end
 
   private
