@@ -24,7 +24,7 @@ class PhotoUsersController < ApplicationController
   def destroy
     @photo_user = PhotoUser.find_by(photo_id: params[:photo_id], collector_id: current_user.id)
     @photo_user.delete
-    redirect_to root_path
+    redirect_to user_photo_users_path(current_user)
   end
 
   private

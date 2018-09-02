@@ -15,6 +15,11 @@ class Photo < ApplicationRecord
     self.image.variant(resize:'300x300!').processed
   end
 
+  def collector_count
+    self.collectors.count
+  end
+
+
   private
   def image_type
     if image.attached? == false

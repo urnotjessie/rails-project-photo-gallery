@@ -1,7 +1,8 @@
 <%= @user.username %> Collection
 <% @user.collected_photos.each do |collect| %>
-  <% @photo_id = collect.id %>
+  <% @creator = User.find(collect.user_id) %>
   <%= image_tag collect.thumbnail %>
   <%= collect.caption %>
+  by <%= link_to "#{@creator.username}", user_path(@creator) %>
   <%= link_to "Remove from my collection", photo_photo_user_path(collect.id, @user.id), method: "DELETE" %>
 <% end %>

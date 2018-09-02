@@ -7,6 +7,7 @@
   <% @user.photos.each do |photo| %>
     <%= image_tag photo.thumbnail %>
     <%= photo.caption %>
+    Collected by <%= photo.collector_count %> people
     <% if logged_in? && @user == current_user %>
       <%= link_to "Delete photo", user_photo_path(@user, photo), method: "DELETE" %>
     <% elsif logged_in? %>
