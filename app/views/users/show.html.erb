@@ -9,6 +9,8 @@
     <%= photo.caption %>
     <% if logged_in? && @user == current_user %>
       <%= link_to "Delete photo", user_photo_path(@user, photo), method: "DELETE" %>
+    <% elsif logged_in? %>
+      <%= link_to "Add to my collection", new_photo_photo_user_path(photo.id) %>
     <% end %>
   <% end %>
 <% end %>

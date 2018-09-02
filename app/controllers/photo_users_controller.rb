@@ -18,8 +18,13 @@ class PhotoUsersController < ApplicationController
   end
 
   def index
-
     @user = current_user
+  end
+
+  def destroy
+    @photo_user = PhotoUser.find_by(photo_id: params[:photo_id], collector_id: current_user.id)
+    @photo_user.delete
+    redirect_to root_path
   end
 
   private
