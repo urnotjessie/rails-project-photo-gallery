@@ -1,25 +1,41 @@
-<div class="center jumbotron">
-
-  <% if session[:user_id] %>
+<% if session[:user_id] %>
+  <div class="col-md-12 center">
     <% @user = User.find(session[:user_id]) %>
     <h1><%= @user.username %></h1>
+  </div>
 
-  <% else %>
-    <%= form_tag(login_path) do %>
-      <%= text_field_tag 'email', nil, placeholder: 'Email' %><br><br>
-      <%= password_field_tag 'password', nil, placeholder: 'Password' %><br><br>
-      <%= submit_tag "Log In" %>
-    <% end %>
+<% else %>
+  <div class="col-md-12 center jumbotron">
+    <div class="card bg-light w-100">
+      <div class="card-header text-center ">
+        <h4>Log in / Sign up</h4>
+      </div>
+      <div class="card-body">
+        <%= form_tag(login_path) do %>
+          <%= text_field_tag 'email', nil, placeholder: 'Email' %><br><br>
+          <%= password_field_tag 'password', nil, placeholder: 'Password' %><br><br>
+          <%= submit_tag "Log In" %>
+        <% end %>
 
-    <%= link_to 'Log in with Facebook!', '/auth/facebook' %>
+        <%= link_to 'Log in with Facebook!', '/auth/facebook' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+  </div>
+
+<div style="background: transparent" class="container-fluid center jumbotron">
+  <% Photo.most_recent(6).each do |photo| %>
+    <div class="col-md-4 card">
+      <%= image_tag photo.thumbnail, :class => "img-thumbnail card-img-top" %>
+      <div class="card-block">
+        <strong><%= link_to "#{photo.user.username}", user_path(photo.user) %></strong>
+        <div class="pl-1"><%= photo.caption %></div>
+        <% if session[:user_id] %>
+          <%= link_to "Add to my collection", new_photo_photo_user_path(photo.id) %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<% Photo.all.each do |photo| %>
-  <%= image_tag photo.thumbnail %>
-  <%= photo.caption %>
-  <%= link_to "#{photo.user.username}", user_path(photo.user) %>
-  <% if session[:user_id] %>
-    <%= link_to "Add to my collection", new_photo_photo_user_path(photo.id) %>
-  <% end %>
-<% end %>

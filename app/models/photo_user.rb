@@ -4,7 +4,8 @@ class PhotoUser < ApplicationRecord
 
   validates_uniqueness_of :photo_id, scope: :collector_id
 
-  scope :most_popular, -> (limit){ select("photo_id, count(collector_id) AS collectors_count").group("photo_id").order("collectors_count DESC").limit(limit) }
+  scope :most_popular, -> (limit){ select("photo_id, count(collector_id) AS collectors_count, created_at").group("photo_id").order("collectors_count DESC, created_at DESC").limit(limit) }
+
 
   def self.labels
     self.all.reject {|collect| collect.label == nil}.collect{|collect| collect.label}
