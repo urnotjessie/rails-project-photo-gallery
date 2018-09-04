@@ -1,15 +1,26 @@
 <h3>My Collection</h3>
 <div style="background: transparent" class="container-fluid center jumbotron">
-  <% @user.collected_photos.each do |collect| %>
-    <% @creator = User.find(collect.user_id) %>
-    <div class="card">
-      <div class="card-header text-center ">
-        <%= image_tag collect.thumbnail, :class => "img-thumbnail card-img-top" %>
+  <% if @user.collected_photos == [] %>
+    <h3> Your collection is empty now. </h3>
+    <h3><%= link_to "Go explore!", root_path %></h3>
+  <% else %>
+    <% @user.collected_photos.each do |collect| %>
+      <% @creator = User.find(collect.user_id) %>
+      <% @photo_user = PhotoUser.find_by(photo_id: collect.id, collector_id: current_user.id) %>
+      <div class="card">
+        <div class="card-header text-center ">
+          <%= image_tag collect.thumbnail, :class => "img-thumbnail card-img-top" %>
+        </div>
+        <div class="card-block">
+          [ <strong><%= link_to "#{@creator.username}", user_path(@creator) %></strong> - <%= collect.caption %> ]<br>
+          <% if @photo_user.label != "" %>
+            label: <%= @photo_user.label %> - <%= link_to "Update label", edit_user_photo_user_path(@user.id, collect.id) %><br>
+          <% else %>
+            <%= link_to "Add label", edit_user_photo_user_path(@user.id, collect.id) %><br>
+          <% end %>
+          <%= link_to "Remove from my collection", photo_photo_user_path(collect.id, @user.id), method: "DELETE" %>
+        </div>
       </div>
-      <div class="card-block">
-        <strong><%= link_to "#{@creator.username}", user_path(@creator) %></strong> - <%= collect.caption %><br>
-        <%= link_to "Remove from my collection", photo_photo_user_path(collect.id, @user.id), method: "DELETE" %>
-      </div>
-    </div>
+    <% end %>
   <% end %>
 </div>

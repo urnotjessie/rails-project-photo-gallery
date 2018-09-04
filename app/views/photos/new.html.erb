@@ -1,13 +1,22 @@
-<%= form_for @photo do |f| %>
-  <% if @photo.errors.any? %>
-    <ul>
-    <% @photo.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  <% end %>
-  <%= f.file_field :image %>
-  <%= f.text_field :caption, placeholder: "Add Caption"%>
+<div class="center jumbotron">
+  <div class="card card-header">
+    <div class="card-header text-center ">
+      <h3>Upload photo</h3><br>
+    </div>
+    <div class="card-body">
+      <%= form_for @photo do |f| %>
+        <% if @photo.errors.any? %>
+          <ul>
+          <% @photo.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        <% end %>
+        <%= f.file_field :image, class: "col-sm-8"  %><br><br>
+        <%= f.text_field :caption, placeholder: "Add Caption", class: "col-sm-8" %>
 
-  <%= f.submit "Upload photo"%>
-<% end %>
+        <%= f.submit "Upload photo"%>
+      <% end %>
+    </div>
+  </div>
+</div>

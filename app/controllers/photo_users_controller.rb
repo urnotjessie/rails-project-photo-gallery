@@ -21,6 +21,17 @@ class PhotoUsersController < ApplicationController
     @user = current_user
   end
 
+  def edit
+    @photo_user = PhotoUser.find_by(photo_id: params[:id], collector_id: current_user.id)
+    @photo = Photo.find(params[:id])
+  end
+
+  def update
+    @photo_user = PhotoUser.find_by(photo_id: params[:photo_id], collector_id: current_user.id)
+    @photo_user.update(label: params[:photo_user][:label])
+    redirect_to user_photo_users_path(User.find(current_user.id))
+  end
+
   def destroy
     @photo_user = PhotoUser.find_by(photo_id: params[:photo_id], collector_id: current_user.id)
     @photo_user.delete

@@ -22,8 +22,7 @@
       <div class="col-md-4 card">
         <%= image_tag photo.thumbnail, :class => "img-thumbnail card-img-top" %>
         <div class="card-block">
-          <strong><%= link_to "#{photo.user.username}", user_path(photo.user) %></strong>
-          <div class="pl-1"><%= photo.caption %></div>
+          [<strong><%= link_to "#{photo.user.username}", user_path(photo.user) %></strong> - <%= photo.caption %>]
           <% if session[:user_id] %>
             <%= link_to "Add to my collection", new_photo_photo_user_path(photo.id) %>
           <% end %>
@@ -38,8 +37,7 @@
       <div class="col-md-4 card">
         <%= image_tag photo.thumbnail, :class => "img-thumbnail card-img-top" %>
         <div class="card-block">
-          <strong><%= link_to "#{photo.user.username}", user_path(photo.user) %></strong>
-          <div class="pl-1"><%= photo.caption %></div>
+          [ <strong><%= link_to "#{photo.user.username}", user_path(photo.user) %></strong> - <%= photo.caption %> ]<br>
           <% if session[:user_id] %>
             <%= link_to "Add to my collection", new_photo_photo_user_path(photo.id) %>
           <% end %>
