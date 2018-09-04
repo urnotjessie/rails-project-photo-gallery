@@ -1,23 +1,24 @@
 <% if session[:user_id] %>
-  <div class="col-md-12 center">
+  <div class="col-md-4">
     <% @user = User.find(session[:user_id]) %>
-    <h1><%= @user.username %></h1>
+    <%= @user.username %>
   </div>
 
 <% else %>
   <div class="col-md-12 center jumbotron">
-    <div class="card bg-light w-100">
+    <div class="card card-header">
       <div class="card-header text-center ">
-        <h4>Log in / Sign up</h4>
+        <h3>Log in / Sign up</h3><br>
       </div>
       <div class="card-body">
         <%= form_tag(login_path) do %>
-          <%= text_field_tag 'email', nil, placeholder: 'Email' %><br><br>
-          <%= password_field_tag 'password', nil, placeholder: 'Password' %><br><br>
-          <%= submit_tag "Log In" %>
+          <%= label_tag 'email', 'Email Address', class: "col-sm-4" %><br>
+          <%= text_field_tag 'email', nil, placeholder: 'jane.doe@example.com', class: 'col-sm-12' %><br><br>
+          <%= label_tag 'password', 'Password', class: "col-sm-4" %><br>
+          <%= password_field_tag 'password', nil, placeholder: '········', class: 'col-sm-12' %><br><br>
+          <%= submit_tag "Log In", class: "btn-primary" %><br><br>
         <% end %>
-
-        <%= link_to 'Log in with Facebook!', '/auth/facebook' %>
+        <%= link_to 'Log in with Facebook', '/auth/facebook' %> or <%= link_to 'Sign up', new_user_path %>
       </div>
     </div>
   </div>

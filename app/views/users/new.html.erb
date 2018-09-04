@@ -1,9 +1,47 @@
-<%= form_for @user do |f| %>
-  <%= f.label :username %><br>
-  <%= f.text_field :username %><br><br>
-  <%= f.label :email %><br>
-  <%= f.text_field :email %><br><br>
-  <%= f.label :password %><br>
-  <%= f.password_field :password, { :value => '' } %><br><br>
-  <%= f.submit %>
-<% end %>
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PhotoGallery</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="signup">
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link_to "Photo Gallery", root_path, id: "logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Log in", root_path %></li>
+            <li><%= link_to "Sign up", new_user_path %></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container-fluid signup-form">
+      <div class="card card-header">
+        <div class="card-header text-center ">
+          <h3>Sign up</h3><br>
+        </div>
+        <div class="card-body">
+          <%= form_for @user do |f| %>
+            <%= f.label :username, class: "col-sm-4"%>
+            <%= f.text_field :username, placeholder: "jane", class: 'col-sm-8' %><br><br>
+            <%= f.label :email, class: "col-sm-4" %>
+            <%= f.text_field :email, placeholder: "jane.doe@example.com", class: 'col-sm-8'%><br><br>
+            <%= f.label :password, class: "col-sm-4" %>
+            <%= f.password_field :password, placeholder: '········', class: 'col-sm-8'%><br><br>
+            <%= f.submit 'Submit', class: "text-center btn-primary" %>
+
+          <% end %>
+        </div>
+    </div>
+  </body>
+</html>
