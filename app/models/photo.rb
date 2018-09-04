@@ -10,8 +10,7 @@ class Photo < ApplicationRecord
   validate :image_type
 
   scope :most_recent, -> (limit) { order("created_at desc").limit(limit) }
-
-  # scope :most_popular, -> (limit) { joins(:user).select("photos.id").joins(:photo_users).select("count(*) as collectors_count FROM users").where("users.id=photo_users.collector_id").order("collectors_count DESC").limit(limit) }
+  scope :ordered_by_date, -> { order("created_at desc") }
 
   def thumbnail
     self.image.variant(resize:'300x300!').processed

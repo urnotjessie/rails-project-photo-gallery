@@ -1,10 +1,16 @@
 <div class="center jumbotron">
-  <%= form_for(@user) do |f| %>
-    <%= f.label :username %><br>
-    <%= f.text_field :username %><br><br>
-    <%= f.label :password %><br>
-    <%= f.password_field :password, { :value => '' } %><br><br>
-
-    <%= f.submit %>
-  <% end %>
+  <div class="card card-header">
+    <div class="card-header text-center ">
+      <h3>Update profile</h3><br>
+    </div>
+    <div class="card-body">
+      <%= form_for(@user) do |f| %>
+        <%= f.label :username, class: "col-sm-4" %>
+        <%= f.text_field :username, class: "col-sm-8" %><br><br>
+        <%= f.label :password, class: "col-sm-4"  %>
+        <%= f.password_field :password, class: "col-sm-8" %><br><br>
+        <%= f.submit 'Update', class: "text-center btn-primary" %>
+      <% end %>
+    </div>
+  </div>
 </div>

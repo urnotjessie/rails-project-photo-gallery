@@ -1,10 +1,4 @@
-<% if session[:user_id] %>
-  <div class="col-md-4">
-    <% @user = User.find(session[:user_id]) %>
-    <%= @user.username %>
-  </div>
-
-<% else %>
+<% if !session[:user_id] %>
   <div class="col-md-12 center jumbotron">
     <div class="card card-header">
       <div class="card-header text-center ">
@@ -22,21 +16,35 @@
       </div>
     </div>
   </div>
-<% end %>
 
+  <div style="background: transparent" class="container-fluid center jumbotron">
+    <% Photo.most_recent(6).each do |photo| %>
+      <div class="col-md-4 card">
+        <%= image_tag photo.thumbnail, :class => "img-thumbnail card-img-top" %>
+        <div class="card-block">
+          <strong><%= link_to "#{photo.user.username}", user_path(photo.user) %></strong>
+          <div class="pl-1"><%= photo.caption %></div>
+          <% if session[:user_id] %>
+            <%= link_to "Add to my collection", new_photo_photo_user_path(photo.id) %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 
-<div style="background: transparent" class="container-fluid center jumbotron">
-  <% Photo.most_recent(6).each do |photo| %>
-    <div class="col-md-4 card">
-      <%= image_tag photo.thumbnail, :class => "img-thumbnail card-img-top" %>
-      <div class="card-block">
-        <strong><%= link_to "#{photo.user.username}", user_path(photo.user) %></strong>
-        <div class="pl-1"><%= photo.caption %></div>
-        <% if session[:user_id] %>
-          <%= link_to "Add to my collection", new_photo_photo_user_path(photo.id) %>
-        <% end %>
+<% else %>
+  <div style="background: transparent" class="container-fluid center jumbotron">
+    <% Photo.ordered_by_date.each do |photo| %>
+      <div class="col-md-4 card">
+        <%= image_tag photo.thumbnail, :class => "img-thumbnail card-img-top" %>
+        <div class="card-block">
+          <strong><%= link_to "#{photo.user.username}", user_path(photo.user) %></strong>
+          <div class="pl-1"><%= photo.caption %></div>
+          <% if session[:user_id] %>
+            <%= link_to "Add to my collection", new_photo_photo_user_path(photo.id) %>
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>
