@@ -1,5 +1,12 @@
-<%= image_tag @photo.thumbnail %>
-<%= @photo.caption %>
+<body class="signup">
+<div class="container-fluid center card">
+  <div class="card-header text-center ">
+    <%= image_tag @photo.thumbnail, :class => "img-thumbnail card-img-top"%>
+  </div>
+  <div class="card-block">
+    <%= @photo.caption %>
+  </div>
+</div>
 
 <%= form_for [@photo, @photo_user] do |f| %>
   <%= f.label :label %><br>
@@ -12,3 +19,4 @@
   <br>
   <%= f.submit "Submit" %>
 <% end %>
+</body>
