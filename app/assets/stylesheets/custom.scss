@@ -68,6 +68,32 @@ p {
   height: 600px;
 }
 
+/* footer */
+.container-footer {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #1c1c1b;
+}
+
+footer {
+  margin-top: 5px;
+  padding-top: 10px;
+  margin-bottom: 50px;
+
+  color: #777;
+}
+
+footer h2 {
+  font-size: 1.5em;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+
 .card {
   padding-bottom: 10px;
 }
