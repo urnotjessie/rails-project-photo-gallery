@@ -1,15 +1,16 @@
 <% if !session[:user_id] %>
-  <div class="col-md-12 center jumbotron">
-    <div class="card">
+  <!-- <div class="col-md-12 center jumbotron"> -->
+  <div class="jumbotron jumbotron-fluid center ">
+    <div class="card card-home">
       <div class="card-header text-center ">
         <h3>Log in / Sign up</h3><br>
       </div>
       <div class="card-body">
         <%= form_tag(login_path) do %>
-          <%= label_tag 'email', 'Email Address', class: "col-sm-4" %><br>
-          <%= text_field_tag 'email', nil, placeholder: 'jane.doe@example.com', class: 'col-sm-12' %><br><br>
-          <%= label_tag 'password', 'Password', class: "col-sm-4" %><br>
-          <%= password_field_tag 'password', nil, placeholder: '········', class: 'col-sm-12' %><br><br>
+          <%= label_tag 'email', 'Email Address', class: "col-sm-4" %>
+          <%= text_field_tag 'email', nil, placeholder: 'jane.doe@example.com', class: 'col-sm-8' %><br><br>
+          <%= label_tag 'password', 'Password', class: "col-sm-4" %>
+          <%= password_field_tag 'password', nil, placeholder: '········', class: 'col-sm-8' %><br><br>
           <%= submit_tag "Log In", class: "btn-primary" %><br><br>
         <% end %>
         <%= link_to 'Log in with Facebook', '/auth/facebook' %> or <%= link_to 'Sign up', new_user_path %>
@@ -17,7 +18,7 @@
     </div>
   </div>
 
-  <div style="background: transparent" class="container-fluid center jumbotron">
+  <div style="background: transparent" class="container-fluid center jumbotron container-home">
     <% Photo.most_recent(6).each do |photo| %>
       <div class="col-md-4 card">
         <%= image_tag photo.thumbnail, :class => "img-thumbnail card-img-top" %>

@@ -97,12 +97,17 @@ footer h2 {
 }
 
 footer a:hover {
-  color: #222;
+  color: #f9f6f6;
 }
 
 
 .card {
   padding-bottom: 10px;
+}
+
+.card-home {
+  width: 400px;
+  margin: auto;
 }
 
 .card-header {

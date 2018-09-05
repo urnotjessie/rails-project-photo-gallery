@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  def new
-  end
 
   def create
     if auth_hash = request.env["omniauth.auth"]
