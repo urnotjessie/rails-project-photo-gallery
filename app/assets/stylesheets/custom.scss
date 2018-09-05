@@ -66,6 +66,7 @@ p {
   background: image-url('background.jpg');
   background-size: cover;
   height: 600px;
+  position: relative;
 }
 
 /* footer */
@@ -73,6 +74,7 @@ p {
   position: relative;
   height: 100%;
 }
+
 .container-footer {
   position: fixed;
   bottom: 0;

@@ -9,15 +9,14 @@
 </div>
 
 <div class="container-fluid label-form">
-<%= form_for [@photo, @photo_user] do |f| %>
+  <%= form_for [@photo, @photo_user] do |f| %>
   <%= f.label :label, 'Add label'%><br>
     <% PhotoUser.labels.each do |label_name| %>
       <%= f.radio_button :label, label_name %> <%= label_name %>
-    <% end %>
-      <br>
-      <%= f.radio_button :label, 'Other' %> Other (please list):
-      <%= f.text_field :label %><br>
-      <br>
-      <%= f.submit "Submit" %><br>
-    <% end %>
+    <% end %><br>
+    <%= f.radio_button :label, 'Other' %> Other (please list):
+    <%= f.text_field :label %><br><br>
+    <%= f.submit "Submit" %><br>
+  <% end %>
+</div>
 </body>
