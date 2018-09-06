@@ -9,4 +9,8 @@ class User < ApplicationRecord
   validates :username, :email, :password_digest, presence: true
   validates :email, uniqueness: true
   validates :password_digest, length: { minimum: 8 }
+
+  def labels
+    self.photo_users.reject {|collect| collect.label == nil || collect.label == ""}.collect{|collect| collect.label}
+  end
 end

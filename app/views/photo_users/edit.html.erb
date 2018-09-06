@@ -11,7 +11,7 @@
 <div class="container-fluid label-form">
   <%= form_for [@photo, @photo_user] do |f| %>
     <%= f.label :label, 'Update label'%><br>
-    <% PhotoUser.labels.each do |label_name| %>
+    <% current_user.labels.each do |label_name| %>
       <%= f.radio_button :label, label_name %> <%= label_name %>
     <% end %>
       <br>
