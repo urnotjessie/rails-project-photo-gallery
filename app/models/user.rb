@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_secure_password
+  has_secure_password :validations => false
 
   has_many :photos
   has_many :photo_users, class_name: 'PhotoUser', foreign_key: :collector_id
