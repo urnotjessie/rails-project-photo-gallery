@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates :password_digest, length: { minimum: 8 }
 
   def labels
-    self.photo_users.reject {|collect| collect.label == nil || collect.label == ""}.collect{|collect| collect.label}
+    labels = self.photo_users.reject {|collect| collect.label == nil || collect.label == ""}.collect{|collect| collect.label}
+    labels = labels.uniq
   end
 end

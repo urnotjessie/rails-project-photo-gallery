@@ -7,7 +7,7 @@ class PhotoUsersController < ApplicationController
   def create
     @photo = Photo.find(params[:photo_id])
 
-    @photo_user = PhotoUser.new(photo_user_params)
+    @photo_user = PhotoUser.new(label: photo_user_label)
     @photo_user.collector_id = current_user.id
     @photo_user.photo_id = @photo.id
     if @photo_user.save
@@ -28,8 +28,8 @@ class PhotoUsersController < ApplicationController
 
   def update
     @photo_user = PhotoUser.find_by(photo_id: params[:photo_id], collector_id: current_user.id)
-    binding.pry
-    @photo_user.update(label: params[:photo_user][:label])
+
+    @photo_user.update(label: photo_user_label)
     redirect_to user_photo_users_path(User.find(current_user.id))
   end
 
@@ -40,9 +40,12 @@ class PhotoUsersController < ApplicationController
   end
 
   private
-
-  def photo_user_params
-    params.require(:photo_user).permit(:label)
+  def photo_user_label
+    if params[:photo_user][:other_label] != ""
+      params[:photo_user][:other_label]
+    else
+      params[:photo_user][:label]
+    end
   end
 
 end

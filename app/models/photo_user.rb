@@ -6,4 +6,6 @@ class PhotoUser < ApplicationRecord
 
   scope :most_popular, -> (limit){ select("photo_id, count(collector_id) AS collectors_count, created_at").group("photo_id").order("collectors_count DESC, created_at DESC").limit(limit) }
 
+  attr_accessor :other_label
+
 end
