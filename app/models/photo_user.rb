@@ -3,15 +3,7 @@ class PhotoUser < ApplicationRecord
   belongs_to :collector, class_name: 'User', foreign_key: :collector_id
 
   validates_uniqueness_of :photo_id, scope: :collector_id
-  validates_uniqueness_of :label, scope: :collector_id
 
   scope :most_popular, -> (limit){ select("photo_id, count(collector_id) AS collectors_count, created_at").group("photo_id").order("collectors_count DESC, created_at DESC").limit(limit) }
-
-
-  # def self.labels
-  #   self.all.reject {|collect| collect.label == nil || collect.label == ""}.collect{|collect| collect.label}
-  # end
-
-
 
 end

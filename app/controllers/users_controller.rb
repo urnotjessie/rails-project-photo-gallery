@@ -9,7 +9,8 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
-      render :new
+      flash[:error] = @user.errors.full_messages
+      redirect_to new_user_path
     end
   end
 
@@ -23,10 +24,11 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if @user.update(username: params[:user][:username])
       redirect_to user_path(@user)
     else
-      render :edit
+      flash[:error] = @user.errors.full_messages
+      redirect_to edit_user_path(@user)
     end
   end
 
@@ -34,7 +36,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 
 end

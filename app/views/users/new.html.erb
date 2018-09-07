@@ -3,7 +3,7 @@
   <div class="card card-header">
     <div class="card-header text-center ">
       <h3>Sign up</h3><br>
-      <% if @user.errors.any? %>
+      <% if flash[:error] %>
         <%= render 'error_messages' %>
       <% end %>
     </div>
@@ -16,6 +16,8 @@
         <%= f.text_field :email, placeholder: "jane.doe@example.com", class: "col-sm-8" %><br><br>
         <%= f.label :password, class: "col-sm-4" %>
         <%= f.password_field :password, placeholder: '········', class: "col-sm-8" %><br><br>
+        <%= f.label :password_confirmation, class: "col-sm-4" %>
+        <%= f.password_field :password_confirmation, placeholder: '········', class: "col-sm-8" %><br><br>
         <%= f.submit 'Submit', class: "text-center btn-primary" %>
       <% end %>
     </div>

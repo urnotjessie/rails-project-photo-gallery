@@ -14,7 +14,7 @@
     <% current_user.labels.each do |label_name| %>
       <%= f.radio_button :label, label_name %> <%= label_name %>
     <% end %>
-      <br>
+    <br>
     <%= f.radio_button :label, 'Other' %> Other (please list):
     <%= f.text_field :label %><br>
     <br>

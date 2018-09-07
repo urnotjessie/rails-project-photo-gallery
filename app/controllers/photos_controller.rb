@@ -2,10 +2,6 @@ class PhotosController < ApplicationController
   before_action :require_login
   skip_before_action :require_login, only: [:index]
 
-  def index
-    @photos = Photo.all
-  end
-
   def new
     @photo = Photo.new(user_id: params[:user_id])
   end
@@ -16,7 +12,22 @@ class PhotosController < ApplicationController
     if @photo.save
       redirect_to user_path(current_user)
     else
-      render :new
+      flash[:error] = @photo.errors.full_messages
+      redirect_to new_user_photo_path(current_user)
+    end
+  end
+
+  def edit
+    @photo = Photo.find(params[:id])
+  end
+
+  def update
+    @photo = Photo.find(params[:id])
+    if @photo.update(caption: params[:photo][:caption])
+      redirect_to user_path(current_user)
+    else
+      flash[:error] = @photo.errors.full_messages
+      redirect_to edit_user_photo_path(current_user, @photo)
     end
   end
 

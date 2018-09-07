@@ -2,15 +2,19 @@
 <div class="container-fluid center card">
   <div class="card card-header">
     <div class="card-header text-center ">
-      <h3>Update profile</h3><br>
+      <h3>Update photo caption</h3><br>
+
       <% if flash[:error] %>
         <%= render 'error_messages' %>
       <% end %>
     </div>
+
+    </div>
     <div class="card-body">
-      <%= form_for(@user) do |f| %>
-        <%= f.label :username, class: "col-sm-5" %>
-        <%= f.text_field :username, class: "col-sm-7" %><br><br>
+      <%= form_for @photo do |f| %>
+        <%= image_tag @photo.thumbnail %><br><br>
+        <%= f.text_field :caption, placeholder: "Update caption" %><br><br>
+        <%= f.submit "Update"%>
       <% end %>
     </div>
   </div>
