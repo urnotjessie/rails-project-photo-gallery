@@ -12,8 +12,5 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
 
-
-  # get '/users/:user_id/collection', to: 'photo_users#index', as: :photo_users
-
   root 'welcome#home'
 end
