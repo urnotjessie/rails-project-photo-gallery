@@ -1,4 +1,5 @@
 class PhotoUsersController < ApplicationController
+  
   def new
     @photo = Photo.find(params[:photo_id])
     @photo_user = PhotoUser.new
@@ -13,6 +14,7 @@ class PhotoUsersController < ApplicationController
     if @photo_user.save
       redirect_to user_photo_users_path(current_user)
     else
+      flash[:error] = @photo_user.errors.full_messages
       redirect_to user_photo_users_path(current_user)
     end
   end
@@ -28,7 +30,6 @@ class PhotoUsersController < ApplicationController
 
   def update
     @photo_user = PhotoUser.find_by(photo_id: params[:photo_id], collector_id: current_user.id)
-
     @photo_user.update(label: photo_user_label)
     redirect_to user_photo_users_path(User.find(current_user.id))
   end

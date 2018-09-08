@@ -1,0 +1,6 @@
+<p> Error(s): </p>
+<ul>
+  <% flash[:error].each do |error| %>
+    <h3><li class="text-danger"><%= error %></li><h3>
+  <% end %>
+</ul>

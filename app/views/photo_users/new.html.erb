@@ -1,6 +1,9 @@
 <body class="signup">
 <div class="container-fluid center card">
   <div class="card-header text-center ">
+    <% if flash[:error] %>
+      <%= render 'error_messages' %>
+    <% end %>
     <%= image_tag @photo.thumbnail, :class => "img-thumbnail card-img-top"%>
   </div>
   <div class="card-block">
@@ -9,14 +12,6 @@
 </div>
 
 <div class="container-fluid label-form">
-  <%= form_for [@photo, @photo_user] do |f| %>
-  <%= f.label :label, 'Add label'%><br>
-    <% current_user.labels.each do |label_name| %>
-      <%= f.radio_button :label, label_name %> <%= label_name %>
-    <% end %><br>
-    <%= f.radio_button :label_new, 'Other' %> Other (please list):
-    <%= f.text_field :label_new %><br><br>
-    <%= f.submit "Submit" %><br>
-  <% end %>
+  <%= render 'form' %>
 </div>
 </body>

@@ -8,6 +8,9 @@
 
 <% else %>
   <div style="background: transparent" class="container-fluid center jumbotron">
+    <% if flash[:error] %>
+      <%= render 'error_messages' %>
+    <% end %>
     <% @user.collected_photos.each do |collect| %>
       <% @creator = User.find(collect.user_id) %>
       <% @photo_user = PhotoUser.find_by(photo_id: collect.id, collector_id: current_user.id) %>
