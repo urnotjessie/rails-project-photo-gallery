@@ -6,12 +6,15 @@ Photo Gallery is a photo sharing application designed to let users share and col
 Users can signup/login through email or facebook. After logged in, users can upload photos, browse photos within the app and add photos to their own collection.
 
 ## Installation
-* git clone git@github.com:urnotjessie/rails-project-photo-gallery.git
 
-* cd rails-project-photo-gallery
+run the following
 
-* bundle install
+* `git clone git@github.com:urnotjessie/rails-project-photo-gallery.git`
 
-* rake db:migrate
+* `cd rails-project-photo-gallery`
 
-* rails s
+* `bundle install`
+
+* `rake db:migrate`
+
+* `rails s`
