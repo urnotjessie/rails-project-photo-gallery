@@ -3,11 +3,11 @@
   <div class="card card-header">
     <div class="card-header text-center ">
       <h3>Upload photo</h3><br>
-
       <% if flash[:error] %>
         <%= render 'error_messages' %>
       <% end %>
     </div>
+    
     <div class="card-body photo-form">
       <%= form_for @photo do |f| %>
         <%= f.file_field :image, class: "col-sm-12"  %><br><br>
