@@ -6,12 +6,12 @@
     <% end %>
     <%= image_tag @photo.thumbnail, :class => "img-thumbnail card-img-top"%>
   </div>
-  <div class="card-block">
+  <div class="card-body">
     <%= @photo.caption %>
   </div>
 </div>
 
-<div class="container-fluid label-form">
+<div class="jumbotron-fluid label-form">
   <%= render 'form' %>
 </div>
 </body>

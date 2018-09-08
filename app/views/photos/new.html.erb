@@ -8,14 +8,11 @@
         <%= render 'error_messages' %>
       <% end %>
     </div>
-
-    </div>
-    <div class="card-body">
+    <div class="card-body photo-form">
       <%= form_for @photo do |f| %>
-        <%= f.file_field :image, class: "col-sm-8"  %><br><br>
-        <%= f.text_field :caption, placeholder: "Add Caption", class: "col-sm-8" %>
-
-        <%= f.submit "Upload photo"%>
+        <%= f.file_field :image, class: "col-sm-12"  %><br><br>
+        <%= f.text_field :caption, placeholder: "Add Caption", class: "col-sm-12" %><br><br>
+        <%= f.submit "Upload photo", class:"col-sm-12"%>
       <% end %>
     </div>
   </div>

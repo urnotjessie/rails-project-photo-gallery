@@ -34,6 +34,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo = Photo.find(params[:id])
     @photo.delete
+    @photo.image.purge
     redirect_to user_path(current_user)
   end
 

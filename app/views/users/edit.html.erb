@@ -3,6 +3,7 @@
   <div class="card card-header">
     <div class="card-header text-center ">
       <h3>Update profile</h3><br>
+
       <% if flash[:error] %>
         <%= render 'error_messages' %>
       <% end %>
@@ -10,8 +11,8 @@
     <div class="card-body">
       <%= form_for(@user) do |f| %>
         <%= f.label :username, class: "col-sm-5" %>
-        <%= f.text_field :username, class: "col-sm-7" %><br><br>
-        <%= f.submit "Update"%>
+        <%= f.text_field :username, class: "col-sm-7" %><br><br><br>
+        <%= f.submit "Submit", class: "col-sm-12"%>
       <% end %>
     </div>
   </div>

@@ -103,6 +103,7 @@ footer a:hover {
 
 .card {
   padding-bottom: 10px;
+  position: relative;
 }
 
 .card-home {
@@ -135,6 +136,11 @@ footer a:hover {
 
 .label-form {
   padding-left: 420px;
+  height: 300px;
+}
+
+.photo-form {
+  height: 300px;
 }
 
 .card-profile {
