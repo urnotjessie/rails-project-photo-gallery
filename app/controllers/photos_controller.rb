@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_action :require_login
+  before_action :require_login, :correct_creator
   skip_before_action :require_login, only: [:index]
 
   def new
@@ -42,4 +42,10 @@ class PhotosController < ApplicationController
   def photo_params
     params.require(:photo).permit(:caption, :image)
   end
+
+  def correct_creator
+    @user = User.find(params[:user_id])
+    redirect_to root_path unless current_user == @user
+  end
+  
 end
