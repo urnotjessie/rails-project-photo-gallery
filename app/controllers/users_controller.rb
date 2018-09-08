@@ -27,7 +27,6 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(username: params[:user][:username])
-      flash[:success] = "Successfully updated!"
       redirect_to user_path(@user)
     else
       flash[:error] = @user.errors.full_messages

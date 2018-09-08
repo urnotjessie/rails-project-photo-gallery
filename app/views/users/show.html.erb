@@ -1,9 +1,6 @@
 <div class="container-fluid card card-profile">
   <div class="card-header ">
     <h3><%= @user.username %></h3>
-    <% if flash[:success] %>
-      <%= flash[:success] %>
-    <% end %>
   </div>
   <div class="card-body">
     <% if logged_in? && @user == current_user %>
