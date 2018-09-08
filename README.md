@@ -1,24 +1,17 @@
-# README
+# PhotoGallery
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Photo Gallery is a photo sharing application designed to let users share and collect photos. Photo Gallery was built with Ruby on Rails.
 
-Things you may want to cover:
+## Usage
+Users can signup/login through email or facebook. After logged in, users can upload photos, browse photos within the app and add photos to their own collection.
 
-* Ruby version
+## Installation
+* git clone git@github.com:urnotjessie/rails-project-photo-gallery.git
 
-* System dependencies
+* cd rails-project-photo-gallery
 
-* Configuration
+* bundle install
 
-* Database creation
+* rake db:migrate
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* rails s
