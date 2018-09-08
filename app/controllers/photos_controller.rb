@@ -36,6 +36,12 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @photo.delete
     @photo.image.purge
+    if @photo.collectors != []
+      @photo.collectors.each do |collect|
+        @photo_user = PhotoUser.find_by(collector_id: collect.id, photo_id: @photo.id)
+        @photo_user.delete
+      end
+    end
     redirect_to user_path(current_user)
   end
 
