@@ -12,6 +12,7 @@ class PhotosController < ApplicationController
     if @photo.save
       redirect_to user_path(current_user)
     else
+      @photo.image.purge
       flash[:error] = @photo.errors.full_messages
       redirect_to new_user_photo_path(current_user)
     end
