@@ -18,3 +18,11 @@ run the following
 * `rake db:migrate`
 
 * `rails s`
+
+## Contribution
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/urnotjessie/rails-project-photo-gallery. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](https://www.contributor-covenant.org/) code of conduct.
+
+## License
+
+PhotoGallery is licensed under the MIT license. (http://opensource.org/licenses/MIT)
