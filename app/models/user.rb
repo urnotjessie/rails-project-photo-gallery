@@ -10,6 +10,9 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :password_digest, length: { minimum: 8 }
 
+  scope :with_most_photos, -> { joins(:photos).group("photos.user_id").order("count(photos.id) desc") }
+
+
   def labels
     labels = self.photo_users.reject {|collect| collect.label == nil || collect.label == ""}.collect{|collect| collect.label}
     labels = labels.uniq
