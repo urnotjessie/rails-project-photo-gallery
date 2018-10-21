@@ -3,12 +3,16 @@ function userListeners() {
   var user_id = $('.show-user').attr('id');
 
   $.get("/users/" + user_id + ".json", function(data) {
-
-    photos = data;
-    loadPhotos(photos)
-  })
+    photos = data.photos;
+    loadPhotos(photos);
+  });
 }
 
-function loadPhotos(data) {
-  $("#show-user-photos").append('append photos')
+function loadPhotos(photos) {
+  debugger
+  var photoCards = "";
+  photos.forEach(function(photo) {
+    photoCards += '<div class="col-md-4 card">' + photo["id"] + ' - ' + photo["caption"] + '</div>';
+      });
+  $("#show-user-photos").html(photoCards);
 }
