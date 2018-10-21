@@ -20,8 +20,8 @@ function loadPhotos(photos, user_id, current_user) {
     '</div>';
 
     if(user_id === current_user) {
-      photoCards += '<a id="delete-photo" href="/users/' + user_id + '/photos/' + photo["id"] + '">Delete photo</a>' + ' | ' +
-      '<a id="update-caption" href="#">Update caption</a>' +
+      photoCards += '<a id="delete-photo" data-method="DELETE" href="/users/' + user_id + '/photos/' + photo["id"] + '">Delete photo</a>' + ' | ' +
+      '<a id="update-caption" href="/users/' + user_id + '/photos/' + photo["id"] + '/edit">Update caption</a>' +
       '</div>';
     } else if(typeof current_user != "undefined") {
       photoCards += '<a id="add-to-collection" href="#">Add to my collection</a>' +
