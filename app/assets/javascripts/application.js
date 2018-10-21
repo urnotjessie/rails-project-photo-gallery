@@ -16,3 +16,8 @@
 //= require_tree .
 //= require jquery3
 //= require jquery_ujs
+
+
+$(document).ready(function () {
+  userListeners()
+})
