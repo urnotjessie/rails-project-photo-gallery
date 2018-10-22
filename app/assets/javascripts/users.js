@@ -24,7 +24,7 @@ function loadPhotos(photos, user_id, current_user) {
       '<a id="update-caption" href="/users/' + user_id + '/photos/' + photo["id"] + '/edit">Update caption</a>' +
       '</div>';
     } else if(typeof current_user != "undefined") {
-      photoCards += '<a id="add-to-collection" href="#">Add to my collection</a>' +
+      photoCards += '<a id="add-to-collection" href="/photos/' + photo["id"] + '/photo_users/new">Add to my collection</a>' +
       '</div>';
     } else {
       photoCards += '</div>'
