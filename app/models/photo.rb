@@ -5,6 +5,7 @@ class Photo < ApplicationRecord
   has_many :collectors, through: :photo_users, source: :collector
 
   has_one_attached :image
+  # before_update :purge_later
 
   validates :caption, presence: true
   validate :image_type

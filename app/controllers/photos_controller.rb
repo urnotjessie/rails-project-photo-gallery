@@ -12,7 +12,7 @@ class PhotosController < ApplicationController
     if @photo.save
       redirect_to user_path(current_user)
     else
-      @photo.image.purge
+      @photo.image.purge_later
       flash[:error] = @photo.errors.full_messages
       redirect_to new_user_photo_path(current_user)
     end
@@ -35,7 +35,7 @@ class PhotosController < ApplicationController
   def destroy
     @photo = Photo.find(params[:id])
     @photo.delete
-    @photo.image.purge
+    @photo.image.purge_later
     if @photo.collectors != []
       @photo.collectors.each do |collect|
         @photo_user = PhotoUser.find_by(collector_id: collect.id, photo_id: @photo.id)
