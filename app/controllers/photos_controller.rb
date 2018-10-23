@@ -45,6 +45,14 @@ class PhotosController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  def show
+    @photo = Photo.find(params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @photo }
+    end
+  end
+
   private
 
   def photo_params
