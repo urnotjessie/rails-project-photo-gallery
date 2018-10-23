@@ -4,6 +4,9 @@ class PhotoSerializer < ActiveModel::Serializer
 
   def image
     thumbnail = object.image.variant(resize:'300x300!').processed
-    return rails_representation_url(thumbnail, only_path: true)
+    return {
+      thumbnail:rails_representation_url(thumbnail, only_path: true),
+      image: rails_blob_path(object.image, only_path: true)
+    }
   end
 end
