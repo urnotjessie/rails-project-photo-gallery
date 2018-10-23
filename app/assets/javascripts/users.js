@@ -13,7 +13,7 @@ function loadPhotos(photos, user_id, current_user) {
 
   photos.forEach(function(photo) {
 
-    photoCards += '<div class="col-md-4 card img-thumbnail-card" id="image-id-' + photo["id"] + '">' +
+    photoCards += '<div class="col-md-4 card img-thumbnail-card" data-image-id="' + photo["id"] + '">' +
     '<image src="' + photo["image"]["thumbnail"] + '" class="img-thumbnail card-img-top"/><br>' +
     '<div class="card-body">' +
     photo["caption"] +
@@ -36,7 +36,8 @@ function loadPhotos(photos, user_id, current_user) {
 }
 
 function imageListener() {
-  $("#show-user-photos").on("click", '.img-thumbnail-card',function() {
-      alert("work")
+  $("#show-user-photos").on("click", '.img-thumbnail-card', function() {
+    var imageId = $(this).data('image-id');
+    window.location.href = "/photos/" + imageId;
     })
 }
