@@ -1,5 +1,5 @@
 class PhotoUserSerializer < ActiveModel::Serializer
-  attributes :creator
+  attributes :creator, :label
 
   def creator
     {
