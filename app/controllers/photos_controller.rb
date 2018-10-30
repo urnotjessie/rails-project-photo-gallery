@@ -1,6 +1,7 @@
 class PhotosController < ApplicationController
   before_action :require_login
   skip_before_action :require_login, only: [:index]
+  skip_before_action :verify_authenticity_token, only: [:update]
 
   def new
     @photo = Photo.new(user_id: params[:user_id])
