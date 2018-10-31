@@ -25,11 +25,8 @@ class PhotosController < ApplicationController
 
   def update
     @photo = Photo.find(params[:id])
-    if @photo.update(caption: params[:photo][:caption])
-      redirect_to user_path(current_user)
-    else
-      flash[:error] = @photo.errors.full_messages
-      redirect_to edit_user_photo_path(current_user, @photo)
+    if @photo.update(caption: params[:photo_caption])
+      render json: @photo, status: 201
     end
   end
 
