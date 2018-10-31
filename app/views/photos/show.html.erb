@@ -7,7 +7,14 @@
       <div class="show-photo-image">
       </div>
 
-      <a href="#" class="js-next" data-id="#">Next Photo</a>
+      <% if @photo.user == current_user %>
+        <div><p><a class="update-label">Update caption</a></p></div>
+      <% end %>
+
+      <div class="caption-form">
+      </div>
+
+      <a href="#" class="js-next" data-id="<%= @photo.id %>">Next Photo</a>
     </div>
 
 
