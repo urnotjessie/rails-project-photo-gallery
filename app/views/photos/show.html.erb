@@ -5,16 +5,21 @@
 
     <div class="card-body photo-form">
       <div class="show-photo-image">
+        <%= image_tag @photo.thumbnail, :class => "img-thumbnail card-img-top" %>
+        <div class="card-body">
+          [ <strong><%= @photo.user.username %></strong> - <span id="caption"><%= @photo.caption %></span> ]
+          <%= @photo.created_at.strftime("%Y-%m-%d")%><br>
+        </div>
       </div>
 
       <% if @photo.user == current_user %>
-        <div><p><a class="update-label">Update caption</a></p></div>
+        <div><p><a class="update-caption">Update caption</a></p></div>
       <% end %>
 
       <div class="caption-form">
       </div>
 
-      <a href="#" class="js-next" data-id="<%= @photo.id %>">Next Photo</a>
+      <a href="#" class="js-next" data-id="<%=@photo.id%>">Next Photo</a>
     </div>
 
 
