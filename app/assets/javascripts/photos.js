@@ -55,12 +55,20 @@ function showPhoto(photoId) {
       var caption = data.caption;
       var user = data.user;
       var creation = data.created_at;
-
+      var collectors = data.collectors;
+    
       var imageTag = '<image src="' + photo["thumbnail"] + '" class="img-thumbnail card-img-top"/><br>' +
       '<div class="card-body">' +
       '<br>[<strong>' + user.username + '</strong> - <span id="caption">' + caption + '</span>]' + '  ' +
-      creation + '<br>' +
-      '</div>';
+      creation + '<br>'
+
+      if(collectors.length != 0) {
+        imageTag += 'collected by:';
+        collectors.forEach(function(collector) {
+          imageTag += ' <span class="underline"><a href="/users/' + collector["id"] + '">' + collector["username"] + '</a></span>'
+        });
+      };
+      imageTag += '</div>';
 
       $(".show-photo-image").empty().append(imageTag);
     });
