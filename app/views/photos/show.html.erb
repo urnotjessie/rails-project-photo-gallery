@@ -9,6 +9,14 @@
         <div class="card-body">
           [ <strong><%= @photo.user.username %></strong> - <span id="caption"><%= @photo.caption %></span> ]
           <%= @photo.created_at.strftime("%Y-%m-%d")%><br>
+
+          <% if @photo.collectors.length != 0 %>
+            collected by:
+            <% @photo.collectors.each do |collector| %>
+              <span class="underline"><%= link_to "#{collector.username}", user_path(collector) %></span>
+            <% end %>
+          <% end %>
+
         </div>
       </div>
 
