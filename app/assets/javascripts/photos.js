@@ -56,20 +56,35 @@ function showPhoto(photoId) {
       var user = data.user;
       var creation = data.created_at;
       var collectors = data.collectors;
-    
+
       var imageTag = '<image src="' + photo["thumbnail"] + '" class="img-thumbnail card-img-top"/><br>' +
       '<div class="card-body">' +
       '<br>[<strong>' + user.username + '</strong> - <span id="caption">' + caption + '</span>]' + '  ' +
-      creation + '<br>'
+      creation + '<br>';
 
       if(collectors.length != 0) {
         imageTag += 'collected by:';
         collectors.forEach(function(collector) {
-          imageTag += ' <span class="underline"><a href="/users/' + collector["id"] + '">' + collector["username"] + '</a></span>'
+          var thisCollector = new Collector(collector.id, collector.username);
+          imageTag += thisCollector.showCollector();
         });
       };
+
       imageTag += '</div>';
 
       $(".show-photo-image").empty().append(imageTag);
     });
+}
+
+// declare collector object
+function Collector(id, username) {
+  this.id = id;
+  this.username = username;
+}
+
+// prototype to display collectors
+Collector.prototype.showCollector = function() {
+  var showCollector = '';
+  showCollector += ' <span class="underline"><a href="/users/' + this.id + '">' + this.username + '</a></span>';
+  return showCollector;
 }
