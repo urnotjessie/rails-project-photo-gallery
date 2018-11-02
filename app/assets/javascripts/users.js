@@ -6,8 +6,15 @@ function userListeners() {
     photos = data.photos;
     loadPhotos(photos, user_id, current_user);
   });
+
+  // eventlistener for photo clicking on user index page
+  $("#show-user-photos").on("click", '.img-thumbnail-card', function() {
+    var imageId = $(this).data('image-id');
+    window.location.href = "/photos/" + imageId;
+  });
 }
 
+// helper function - create elements for photos on user index page
 function loadPhotos(photos, user_id, current_user) {
   var photoCards = "";
 
@@ -29,15 +36,7 @@ function loadPhotos(photos, user_id, current_user) {
     } else {
       photoCards += '</div>'
     }
-
   });
 
   $("#show-user-photos").html(photoCards);
-}
-
-function imageListener() {
-  $("#show-user-photos").on("click", '.img-thumbnail-card', function() {
-    var imageId = $(this).data('image-id');
-    window.location.href = "/photos/" + imageId;
-    })
 }
