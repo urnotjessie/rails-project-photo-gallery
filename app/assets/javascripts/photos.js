@@ -1,6 +1,5 @@
 function photoListeners() {
   var photoId = $('.show-photo').data('photo-id');
-  var userId = $('.show-photo').data('user-id');
 
   // append update-caption form on click
   $(".update-caption").on("click", function() {
