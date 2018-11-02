@@ -1,12 +1,28 @@
 function photoListeners() {
-  var photoId = $('.show-photo').data('photo-id');
 
+  $(".js-next").on("click", function() {
+    var currentId = $(".js-next").attr("data-id");
+
+    $.get("/photos/" + currentId + ".json", function(data) {
+      var photo = data;
+      var nextPhoto = photo.next_id;
+
+      $(".js-next").attr("data-id", nextPhoto);
+
+      showPhoto(nextPhoto);
+      showForm(nextPhoto);
+    });
+  });
+}
+
+function showForm(photoId) {
   // append update-caption form on click
   $(".update-caption").on("click", function() {
+
     var labelForm = '<form id="caption_form" action="/photos/' + photoId + '">' +
     '<input type="text" name="photo[caption]" id="photo_caption" value="' + $("#caption")[0].innerHTML + '"/>' +
     '<input type="submit" value="submit" id="submit" /></form>';
-    $(".caption-form").append(labelForm);
+    $(".caption-form").empty().append(labelForm);
   });
 
   // submit handler for the form
@@ -18,6 +34,7 @@ function photoListeners() {
     var patchData = {'photo_caption': updatedCaption};
     // var values = $(this).serialize();
     var url = $form.attr( "action" );
+
     $.ajax({
       headers: {'Accept':'application/json','Content-Type':'application/json'},
       url: url,
@@ -30,20 +47,6 @@ function photoListeners() {
       }
     })
   })
-
-  //
-  $(".js-next").on("click", function() {
-    var currentId = $(".js-next").attr("data-id");
-
-    $.get("/photos/" + currentId + ".json", function(data) {
-      var photo = data;
-      var nextPhoto = photo.next_id;
-
-      $(".js-next").attr("data-id", nextPhoto);
-
-      showPhoto(nextPhoto);
-    });
-  });
 }
 
 function showPhoto(photoId) {
