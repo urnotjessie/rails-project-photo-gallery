@@ -40,15 +40,6 @@ class PhotoUsersController < ApplicationController
     redirect_to user_photo_users_path(current_user)
   end
 
-  def show
-    @photo_user = PhotoUser.find_by(photo_id: params[:id], collector_id: current_user.id)
-    @user = current_user
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @photo_user }
-    end
-  end
-
   private
   def photo_user_label
     if params[:photo_user][:other_label] != ""
