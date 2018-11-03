@@ -1,4 +1,9 @@
 function photoListeners() {
+  var currentId = $(".js-next").attr("data-id");
+  photoForm(currentId);
+  // $(".update-caption").on("click", function() {
+  //   console.log($(".js-next").attr("data-id"));
+  // });
 
   $(".js-next").on("click", function() {
     var currentId = $(".js-next").attr("data-id");
@@ -8,31 +13,30 @@ function photoListeners() {
       var nextPhoto = photo.next_id;
 
       $(".js-next").attr("data-id", nextPhoto);
-
       showPhoto(nextPhoto);
-      showForm(nextPhoto);
+      photoForm(nextPhoto);
     });
   });
+
 }
 
-function showForm(photoId) {
+function photoForm(photoId) {
   // append update-caption form on click
   $(".update-caption").on("click", function() {
 
-    var labelForm = '<form id="caption_form" action="/photos/' + photoId + '">' +
+    var labelForm = '<form id="caption-form-' + photoId + '" action="/photos/' + photoId + '">' +
     '<input type="text" name="photo[caption]" id="photo_caption" value="' + $("#caption")[0].innerHTML + '"/>' +
     '<input type="submit" value="submit" id="submit" /></form>';
     $(".caption-form").empty().append(labelForm);
   });
 
   // submit handler for the form
-  $(".caption-form").on("submit", '#caption_form', function() {
+  $(".caption-form").on("submit", '#caption-form-'+photoId, function() {
     event.preventDefault();
 
     var $form = $(this);
     var updatedCaption = $form.find("input[name='photo[caption]']").val();
     var patchData = {'photo_caption': updatedCaption};
-    // var values = $(this).serialize();
     var url = $form.attr( "action" );
 
     $.ajax({
@@ -45,8 +49,8 @@ function showForm(photoId) {
         $("#caption")[0].innerHTML = data["caption"];
         $("form").hide();
       }
-    })
-  })
+    });
+  });
 }
 
 function showPhoto(photoId) {
