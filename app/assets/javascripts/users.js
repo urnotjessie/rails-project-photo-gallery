@@ -29,7 +29,7 @@ function loadPhotos(photos, user_id, current_user) {
 
     if(user_id === current_user) {
       photoCards += '<a id="delete-photo" data-method="DELETE" href="/users/' + user_id + '/photos/' + photo["id"] + '">Delete photo</a>' + ' | ' +
-      '<span id="update-caption-' + photo["id"] + '"><a>Update caption</a></span>' +
+      '<span><a id="update-caption-' + photo["id"] + '">Update caption</a></span>' +
       '</div>';
     } else if(typeof current_user != "undefined") {
       photoCards += '<a id="add-to-collection" href="/photos/' + photo["id"] + '/photo_users/new">Add to my collection</a>' +
@@ -47,6 +47,7 @@ function loadPhotos(photos, user_id, current_user) {
 function showForm(photo) {
   // append update-caption form on click
   $("#show-user-photos").on("click", '#update-caption-'+photo["id"], function() {
+    
   // $(".update-caption").on("click", function() {
 
     var labelForm = '<form id="caption_form" action="/photos/' + photo["id"] + '">' +
@@ -54,7 +55,7 @@ function showForm(photo) {
     '<input type="submit" value="submit" id="submit" /></form>';
 
     $("#show-user-photos").find("#caption-form-"+photo["id"])
-    $(this).append(labelForm);
+    $(this).parent().append(labelForm);
     // console.log($(this).text())
   });
 
