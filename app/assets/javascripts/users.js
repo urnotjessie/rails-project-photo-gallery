@@ -10,7 +10,6 @@ function userListeners() {
   // eventlistener for photo clicking on user index page
   $("#show-user-photos").on("click", '.img-thumbnail', function() {
     var imageId = $(this).data('image-id');
-    debugger
     window.location.href = "/photos/" + imageId;
   });
 }
@@ -29,8 +28,7 @@ function loadPhotos(photos, user_id, current_user) {
     '</div>';
 
     if(user_id === current_user) {
-      photoCards += '<a id="delete-photo" data-method="DELETE" href="/users/' + user_id + '/photos/' + photo["id"] + '">Delete photo</a>' + ' | ' +
-      '<span><a id="update-caption-' + photo["id"] + '">Update caption</a></span>' +
+      photoCards += '<a id="delete-photo" data-method="DELETE" href="/users/' + user_id + '/photos/' + photo["id"] + '">Delete photo</a>' +
       '</div>';
     } else if(typeof current_user != "undefined") {
       photoCards += '<a id="add-to-collection" href="/photos/' + photo["id"] + '/photo_users/new">Add to my collection</a>' +
@@ -38,44 +36,7 @@ function loadPhotos(photos, user_id, current_user) {
     } else {
       photoCards += '</div>'
     }
-
-    showForm(photo);
   });
 
   $("#show-user-photos").html(photoCards);
-}
-
-function showForm(photo) {
-  // append update-caption form on click
-  $("#show-user-photos").on("click", "#update-caption-" + photo["id"], function() {
-    if(!$(this).parent().has("form").length) {
-      var captionForm = '<form id="caption-form-' + photo["id"] + '" action="/photos/' + photo["id"] + '">' +
-      '<input type="text" name="photo[caption]" id="photo_caption" value="' + photo["caption"] + '"/>' +
-      '<input type="submit" value="submit" id="submit" /></form>';
-      $(this).parent().append(captionForm);
-    }
-  });
-
-  // submit handler for the form
-  $("#show-user-photos").on("submit", '#caption-form-'+photo["id"], function() {
-    event.preventDefault();
-
-    var $form = $(this);
-    var updatedCaption = $form.find("input[name='photo[caption]']").val();
-    var patchData = {'photo_caption': updatedCaption};
-    // var values = $(this).serialize();
-    var url = $form.attr( "action" );
-
-    $.ajax({
-      headers: {'Accept':'application/json','Content-Type':'application/json'},
-      url: url,
-      type: 'patch',
-      data: JSON.stringify(patchData),
-      success: function(data) {
-        alert("Caption updated!");
-        $("#caption-"+photo["id"])[0].innerHTML = data["caption"];
-        $("form#caption-form-"+photo["id"]).remove();
-      }
-    })
-  })
 }
