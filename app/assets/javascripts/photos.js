@@ -1,9 +1,40 @@
+/*
+  user show page -- user's photos index page
+*/
+function userListeners() {
+  var user_id = parseInt($('.show-user').attr('id'));
+
+  $.get("/users/" + user_id + ".json", function(data) {
+    photos = data.photos;
+    loadPhotos(photos);
+  });
+
+  // eventlistener for photo clicking on user index page
+  $("#show-user-photos").on("click", '.img-thumbnail', function() {
+    var imageId = $(this).data('image-id');
+    window.location.href = "/photos/" + imageId;
+  });
+}
+
+// helper function - create elements for photos on user index page
+function loadPhotos(photos) {
+  var photoCards = "";
+
+  photos.forEach(function(photo) {
+    var thisPhoto = new Photo(photo.id, photo.image, photo.caption, photo.user, photo.creation, photo.collectors);
+    photoCards += thisPhoto.showPhotoCard();
+  });
+
+  $("#show-user-photos").html(photoCards);
+}
+
+
+/*
+  photo show page
+*/
 function photoListeners() {
   var currentId = $(".js-next").attr("data-id");
   captionForm(currentId);
-  // $(".update-caption").on("click", function() {
-  //   console.log($(".js-next").attr("data-id"));
-  // });
 
   $(".js-next").on("click", function() {
     var currentId = $(".js-next").attr("data-id");
@@ -56,14 +87,14 @@ function captionForm(photoId) {
 function showPhoto(photoId) {
   // create image element for photo show page
   $.get("/photos/" + photoId + ".json", function(data) {
-
+      var id = data.id;
       var photo = data.image;
       var caption = data.caption;
       var user = data.user;
       var creation = data.created_at;
       var collectors = data.collectors;
 
-      var thisPhoto = new Photo(photo, caption, user, creation, collectors)
+      var thisPhoto = new Photo(id, photo, caption, user, creation, collectors)
       var imageTag = thisPhoto.showPhoto();
 
       if(collectors.length != 0) {
@@ -94,7 +125,8 @@ Collector.prototype.showCollector = function() {
 
 
 // declare photo object
-function Photo(image, caption, user, creation, collectors) {
+function Photo(id, image, caption, user, creation, collectors) {
+  this.id = id;
   this.image = image;
   this.caption = caption;
   this.user  = user;
@@ -111,4 +143,27 @@ Photo.prototype.showPhoto = function() {
   this.creation + '<br>';
 
   return showPhoto;
+}
+
+Photo.prototype.showPhotoCard = function() {
+  var current_user = $('li[data-user-id]').data('user-id');
+  var showPhotoCard = '';
+
+  showPhotoCard += '<div class="col-md-4 card img-thumbnail-card">' +
+  '<image src="' + this.image["thumbnail"] + '" class="img-thumbnail card-img-top" data-image-id="'+ this.id +'"/><br>' +
+  '<div class="card-body">' +
+  this.caption +
+  '</div>';
+
+  if(this.user.id === current_user) {
+    showPhotoCard += '<a id="delete-photo" data-method="DELETE" href="/users/' + this.user.id + '/photos/' + this.id + '">Delete photo</a>' +
+    '</div>';
+  } else if(typeof current_user != "undefined") {
+    showPhotoCard += '<a id="add-to-collection" href="/photos/' + this.id + '/photo_users/new">Add to my collection</a>' +
+    '</div>';
+  } else {
+    showPhotoCard += '</div>'
+  }
+
+  return showPhotoCard;
 }
