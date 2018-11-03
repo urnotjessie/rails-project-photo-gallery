@@ -63,12 +63,8 @@ function showPhoto(photoId) {
       var creation = data.created_at;
       var collectors = data.collectors;
 
-      // var thisPhoto = new Photo(photo, caption, user, creation, collectors, )
-
-      var imageTag = '<image src="' + photo["thumbnail"] + '" class="img-thumbnail card-img-top"/><br>' +
-      '<div class="card-body">' +
-      '<br>[<strong>' + user.username + '</strong> - <span id="caption">' + caption + '</span>]' + '  ' +
-      creation + '<br>';
+      var thisPhoto = new Photo(photo, caption, user, creation, collectors)
+      var imageTag = thisPhoto.showPhoto();
 
       if(collectors.length != 0) {
         imageTag += 'collected by:';
@@ -89,7 +85,6 @@ function Collector(id, username) {
   this.id = id;
   this.username = username;
 }
-
 // prototype to display collectors
 Collector.prototype.showCollector = function() {
   var showCollector = '';
@@ -98,7 +93,7 @@ Collector.prototype.showCollector = function() {
 }
 
 
-// declare collector object
+// declare photo object
 function Photo(image, caption, user, creation, collectors) {
   this.image = image;
   this.caption = caption;
@@ -106,8 +101,7 @@ function Photo(image, caption, user, creation, collectors) {
   this.creation = creation;
   this.collectors = collectors;
 }
-
-// prototype to display collectors
+// prototype to display photo
 Photo.prototype.showPhoto = function() {
   var showPhoto = '';
 
