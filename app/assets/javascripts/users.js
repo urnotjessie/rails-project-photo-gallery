@@ -47,15 +47,13 @@ function loadPhotos(photos, user_id, current_user) {
 
 function showForm(photo) {
   // append update-caption form on click
-  $("#show-user-photos").one("click", "#update-caption-" + photo["id"], function() {
-
-  // $(".update-caption").on("click", function() {
-
-    var captionForm = '<form id="caption-form-' + photo["id"] + '" action="/photos/' + photo["id"] + '">' +
-    '<input type="text" name="photo[caption]" id="photo_caption" value="' + photo["caption"] + '"/>' +
-    '<input type="submit" value="submit" id="submit" /></form>';
-
-    $(this).parent().append(captionForm);
+  $("#show-user-photos").on("click", "#update-caption-" + photo["id"], function() {
+    if(!$(this).parent().has("form").length) {
+      var captionForm = '<form id="caption-form-' + photo["id"] + '" action="/photos/' + photo["id"] + '">' +
+      '<input type="text" name="photo[caption]" id="photo_caption" value="' + photo["caption"] + '"/>' +
+      '<input type="submit" value="submit" id="submit" /></form>';
+      $(this).parent().append(captionForm);
+    }
   });
 
   // submit handler for the form
@@ -76,7 +74,7 @@ function showForm(photo) {
       success: function(data) {
         alert("Caption updated!");
         $("#caption-"+photo["id"])[0].innerHTML = data["caption"];
-        $("form").hide();
+        $("form#caption-form-"+photo["id"]).remove();
       }
     })
   })
