@@ -1,9 +1,8 @@
 class PhotoSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :caption, :next_id, :created_at, :image, :total_collectors
+  attributes :id, :caption, :next_id, :created_at, :user, :image, :total_collectors
 
-  belongs_to :user, serializer: UserSerializer
   has_many :collectors, class_name: 'User', through: :photo_users, serializer: UserSerializer
 
   def next_id
@@ -19,6 +18,10 @@ class PhotoSerializer < ActiveModel::Serializer
 
   def created_at
     return object.created_at.strftime("%Y-%m-%d")
+  end
+
+  def user
+    return {id: object.user.id, usernmae: object.user.username}
   end
 
   def image
