@@ -63,6 +63,8 @@ function showPhoto(photoId) {
       var creation = data.created_at;
       var collectors = data.collectors;
 
+      // var thisPhoto = new Photo(photo, caption, user, creation, collectors, )
+
       var imageTag = '<image src="' + photo["thumbnail"] + '" class="img-thumbnail card-img-top"/><br>' +
       '<div class="card-body">' +
       '<br>[<strong>' + user.username + '</strong> - <span id="caption">' + caption + '</span>]' + '  ' +
@@ -93,4 +95,26 @@ Collector.prototype.showCollector = function() {
   var showCollector = '';
   showCollector += ' <span class="underline"><a href="/users/' + this.id + '">' + this.username + '</a></span>';
   return showCollector;
+}
+
+
+// declare collector object
+function Photo(image, caption, user, creation, collectors) {
+  this.image = image;
+  this.caption = caption;
+  this.user  = user;
+  this.creation = creation;
+  this.collectors = collectors;
+}
+
+// prototype to display collectors
+Photo.prototype.showPhoto = function() {
+  var showPhoto = '';
+
+  showPhoto += '<image src="' + this.image["thumbnail"] + '" class="img-thumbnail card-img-top"/><br>' +
+  '<div class="card-body">' +
+  '<br>[<strong>' + this.user.username + '</strong> - <span id="caption">' + this.caption + '</span>]' + '  ' +
+  this.creation + '<br>';
+
+  return showPhoto;
 }
