@@ -10,6 +10,7 @@ function userListeners() {
   // eventlistener for photo clicking on user index page
   $("#show-user-photos").on("click", '.img-thumbnail', function() {
     var imageId = $(this).data('image-id');
+    debugger
     window.location.href = "/photos/" + imageId;
   });
 }
@@ -23,7 +24,7 @@ function loadPhotos(photos, user_id, current_user) {
 
     photoCards += '<div class="col-md-4 card img-thumbnail-card">' +
     '<image src="' + photo["image"]["thumbnail"] + '" class="img-thumbnail card-img-top" data-image-id="'+ photo["id"] +'"/><br>' +
-    '<div class="card-body" id="caption">' +
+    '<div class="card-body" id="caption-' + photo["id"] + '">' +
     photo["caption"] +
     '</div>';
 
@@ -46,21 +47,19 @@ function loadPhotos(photos, user_id, current_user) {
 
 function showForm(photo) {
   // append update-caption form on click
-  $("#show-user-photos").on("click", '#update-caption-'+photo["id"], function() {
-    
+  $("#show-user-photos").one("click", "#update-caption-" + photo["id"], function() {
+
   // $(".update-caption").on("click", function() {
 
-    var labelForm = '<form id="caption_form" action="/photos/' + photo["id"] + '">' +
+    var captionForm = '<form id="caption-form-' + photo["id"] + '" action="/photos/' + photo["id"] + '">' +
     '<input type="text" name="photo[caption]" id="photo_caption" value="' + photo["caption"] + '"/>' +
     '<input type="submit" value="submit" id="submit" /></form>';
 
-    $("#show-user-photos").find("#caption-form-"+photo["id"])
-    $(this).parent().append(labelForm);
-    // console.log($(this).text())
+    $(this).parent().append(captionForm);
   });
 
   // submit handler for the form
-  $(".caption-form").on("submit", '#caption_form', function() {
+  $("#show-user-photos").on("submit", '#caption-form-'+photo["id"], function() {
     event.preventDefault();
 
     var $form = $(this);
@@ -76,7 +75,7 @@ function showForm(photo) {
       data: JSON.stringify(patchData),
       success: function(data) {
         alert("Caption updated!");
-        $("#caption")[0].innerHTML = data["caption"];
+        $("#caption-"+photo["id"])[0].innerHTML = data["caption"];
         $("form").hide();
       }
     })
