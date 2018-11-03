@@ -1,6 +1,6 @@
 function photoListeners() {
   var currentId = $(".js-next").attr("data-id");
-  photoForm(currentId);
+  captionForm(currentId);
   // $(".update-caption").on("click", function() {
   //   console.log($(".js-next").attr("data-id"));
   // });
@@ -14,13 +14,13 @@ function photoListeners() {
 
       $(".js-next").attr("data-id", nextPhoto);
       showPhoto(nextPhoto);
-      photoForm(nextPhoto);
+      captionForm(nextPhoto);
     });
   });
 
 }
 
-function photoForm(photoId) {
+function captionForm(photoId) {
   // append update-caption form on click
   $(".update-caption").on("click", function() {
 
