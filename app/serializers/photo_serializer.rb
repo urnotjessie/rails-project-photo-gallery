@@ -21,7 +21,7 @@ class PhotoSerializer < ActiveModel::Serializer
   end
 
   def user
-    return {id: object.user.id, usernmae: object.user.username}
+    return {id: object.user.id, username: object.user.username}
   end
 
   def image
