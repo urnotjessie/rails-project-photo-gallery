@@ -9,6 +9,7 @@ function userListeners() {
     loadPhotos(photos);
   });
 
+
   // eventlistener for photo clicking on user index page
   $("#show-user-photos").on("click", '.img-thumbnail', function() {
     var imageId = $(this).data('image-id');
@@ -39,7 +40,7 @@ function photoListeners() {
   $(".js-next").on("click", function() {
     var currentId = $(".js-next").attr("data-id");
 
-    $.get("/photos/" + currentId + ".json", function(data) {
+    $.get("/photos/" + currentId + '.json', function(data) {
       var photo = data;
       var nextPhoto = photo.next_id;
 
@@ -86,7 +87,7 @@ function captionForm(photoId) {
 
 function showPhoto(photoId) {
   // create image element for photo show page
-  $.get("/photos/" + photoId + ".json", function(data) {
+  $.get("/photos/" + photoId + '.json', function(data) {
       var id = data.id;
       var photo = data.image;
       var caption = data.caption;
@@ -133,6 +134,7 @@ function Photo(id, image, caption, user, creation, collectors) {
   this.creation = creation;
   this.collectors = collectors;
 }
+
 // prototype to display photo
 Photo.prototype.showPhoto = function() {
   var showPhoto = '';

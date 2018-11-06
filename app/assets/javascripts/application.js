@@ -17,6 +17,8 @@
 //= require jquery_ujs
 
 $(document).ready(function () {
-  userListeners();
+  if ($('.show-user').attr('id') !== undefined) {
+    userListeners();
+  }
   photoListeners();
 })
